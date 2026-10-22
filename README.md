@@ -5,7 +5,7 @@ Marvin Okotie
 ## Layout
 
 ```
-src/preprocessing/   data loading, cleaning, and validation of design choices
+src/pre-analysis/   data loading, cleaning, and validation of design choices
 scripts/             runnable analyses
 results/             outputs (not tracked)
 ```
