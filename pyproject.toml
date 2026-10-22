@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ndnel-bci"
+version = "0.0.1"
+description = "Offline EEG motor-imagery analysis and decoding for 2D BCI control"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "mne",
+    "moabb",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
