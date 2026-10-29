@@ -13,4 +13,10 @@ REGIONS = {
 
 def channels_in(region, ch_names):
     """Return the channels in a region that are present in ch_names."""
-    raise NotImplementedError
+    
+    if region not in REGIONS:
+        raise ValueError(f"unknown region {region!r}; choose from {list(REGIONS)}")
+    
+    present = set(ch_names)
+    
+    return tuple(ch for ch in REGIONS[region] if ch in present)

@@ -1,7 +1,7 @@
-"""Signed r² discriminability maps between two conditions.
+"""Signed r2 discriminability maps between two conditions.
 
 Pipeline: epochs -> log power spectrum per epoch -> per (channel, frequency)
-correlation with a binary label -> signed r², p-values, rankings.
+correlation with a binary label -> signed r2, p-values, rankings.
 """
 
 
@@ -22,7 +22,10 @@ def log_power(epochs, fmin=1.0, fmax=40.0):
     1 s segments averaged, trading frequency resolution for lower variance.
     All epochs must have the same length or the bins will not line up.
     """
-    raise NotImplementedError
+
+    epochs.compute_psd(method="welch", fmin=fmin, fmax=fmax, n_fft=sfreq, n_per_seg=sfreq)
+
+    raise NotImplementedError               
 
 
 def signed_r2(X, y):
@@ -54,7 +57,7 @@ def signed_r2(X, y):
 
 
 def r2_pvalues(r2, n, correction="fdr"):
-    """Two-sided p-values for each r², with multiple-comparison correction.
+    """Two-sided p-values for each r2, with multiple-comparison correction.
 
     Notes
     -----
@@ -70,7 +73,7 @@ def r2_pvalues(r2, n, correction="fdr"):
 
 
 def rank_channels(r2, ch_names, freqs, band=(8.0, 30.0)):
-    """Rank channels by peak |r²| inside `band`.
+    """Rank channels by peak |r2| inside `band`.
 
     Returns a list of (channel, peak_r2, peak_freq), sorted descending by
     |peak_r2|. Peak rather than mean, because the reactive band is
